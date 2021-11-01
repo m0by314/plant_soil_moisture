@@ -4,6 +4,7 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+.DS_Store
 
 // Sensitive data
-lib/config/config.h
+config.h
