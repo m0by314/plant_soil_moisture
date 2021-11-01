@@ -13,6 +13,8 @@ int soil_moisture_percent;
 void setup() {
   Serial.begin(115200);
 
+  esp_sleep_enable_timer_wakeup(TIME_TO_SECOND * uS_TO_S_FACTOR);  // Timer for the wakeup of the ESP
+
   pinMode(MOISTURE_SENSOR_PIN,INPUT);
   adcAttachPin(MOISTURE_SENSOR_PIN);
   
@@ -21,16 +23,20 @@ void setup() {
   io.connect();
 
   // wait for a connection
-  while(io.status() < AIO_CONNECTED) {
+  int timeout = 10;
+  while(io.status() < AIO_CONNECTED && (timeout-- > 0)) {
     Serial.print(".");
-    delay(500);
+    sleep(1);
+  }
+  if (io.status() < AIO_CONNECTED) {
+    Serial.println();
+    Serial.println("ERROR: Adafruit IO fail connection");
+    esp_deep_sleep_start();
   }
 
   // we are connected
   Serial.println();
   Serial.println(io.statusText());
-  
-  esp_sleep_enable_timer_wakeup(TIME_TO_SECOND * uS_TO_S_FACTOR);  // Timer for the wakeup of the ESP
   
   delay(2000); 
 }

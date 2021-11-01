@@ -5,7 +5,7 @@
 #define MOISTURE_SENSOR_PIN 36 
 
 /* Sleep Time */
-#define HOUR_TO_SLEEP 6                           /* Sleep time between each measurement  */
+#define HOUR_TO_SLEEP 6ULL                        /* Sleep time between each measurement  */
 #define uS_TO_S_FACTOR 1000000                    /* Conversion factor for micro seconds to seconds */
 #define TIME_TO_SECOND (HOUR_TO_SLEEP * 60 * 60)  /* Time ESP32 will go to sleep (in seconds) */
 
