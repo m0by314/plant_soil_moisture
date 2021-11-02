@@ -1,5 +1,5 @@
 # Plants soil moisture monitoring
-Tool to plants soil moisture monitoring with Adafruit IO dashboard
+Tool to plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 with soil moisture sensor.
 
 ## Summary
  - [How it works](#How-it-works)
