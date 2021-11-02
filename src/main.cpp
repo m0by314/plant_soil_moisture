@@ -13,7 +13,7 @@ int soil_moisture_percent;
 void setup() {
   Serial.begin(115200);
 
-  esp_sleep_enable_timer_wakeup(TIME_TO_SECOND * uS_TO_S_FACTOR);  // Timer for the wakeup of the ESP
+  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);  // Timer for the wakeup of the ESP
 
   pinMode(MOISTURE_SENSOR_PIN,INPUT);
   adcAttachPin(MOISTURE_SENSOR_PIN);
