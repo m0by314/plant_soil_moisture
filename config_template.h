@@ -13,10 +13,10 @@
 Moisture Sensor Calibration 
 See this link https://www.hackster.io/m0by314/calibrate-soil-moisture-sensor-3c3a39 for cabribrate moisture sensor 
 */ 
-#define DRY_VALUE "YOUR DRY VALUE"   /* Replace with the value obtained in dry soil */
-#define WET_VALUE "YOUR WET VALUE"   /* Replace with the value obtained in wet soil */
 #define MIN 0
 #define MAX 100
+#define DRY_VALUE "YOUR DRY VALUE"   /* Replace with the value obtained in dry soil */
+#define WET_VALUE "YOUR WET VALUE"   /* Replace with the value obtained in wet soil */
 
 /* WIFI Setting */
 #define WIFI_SSID "YOUR_WIFI_SSID"     /* Replace with your wifi ssid. */
