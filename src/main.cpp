@@ -38,19 +38,14 @@ void setup() {
   Serial.println();
   Serial.println(io.statusText());
   
-  delay(2000); 
-}
-  
-
-void loop() {
   // io.run(); is required for all sketches.
   // it should always be present at the top of your loop
   // function. it keeps the client connected to
   // io.adafruit.com, and processes any incoming data.
   io.run();
 
+  // Read Sensor
   Serial.println("Reading From the Sensor ...");
-
   soil_moisture = analogRead(MOISTURE_SENSOR_PIN);
   soil_moisture_percent = map(soil_moisture, DRY_VALUE, WET_VALUE, MIN, MAX); // calculates the percentage of humidity
   
@@ -59,9 +54,10 @@ void loop() {
   // Send data to the feed.
   moisture->save(soil_moisture_percent);
 
+  // Start deep sleep
   Serial.println("Going to sleep ...\n");
-  
-  delay(2000);
-
+  delay(5000);
   esp_deep_sleep_start();
 }
+
+void loop() {}
