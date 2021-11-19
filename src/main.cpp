@@ -1,10 +1,15 @@
 #include <Arduino.h>
 #include <AdafruitIO_WiFi.h>
+#include <WiFiClientSecure.h>
+
+#include <ifttt.h>
 #include "../config.h"
 
 // Prototype
 AdafruitIO_WiFi io(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PWD);  // Set up the adafruit WiFi client.
 AdafruitIO_Feed *moisture = io.feed(IO_FEED_NAME); // Set up the feed.
+WiFiClientSecure client;
+IFTTT ifttt_mail(IFTTT_KEY, client);   // Initialize Ifttt object.
 
 // Variables 
 int soil_moisture;
@@ -51,6 +56,16 @@ void setup() {
   
   Serial.printf("Moisture : %i%%\n", soil_moisture_percent);
   
+  // Send mail when the percentage of soil moisture lower a 25%
+  if (soil_moisture_percent <= 25) {
+    // Built the mail 
+    String mail_object = String(PLANT_NAME) + " must be watered";
+    String mail_body = "The " + String(PLANT_NAME) + " must be watered, the percentage of soil moisture is: " + String(soil_moisture_percent) + ".<br>";
+
+    // Send mail
+    ifttt_mail.triggerEvent(IFTTT_EVENT_NAME, MAILTO, mail_object, mail_body);
+  }
+
   // Send data to the feed.
   moisture->save(soil_moisture_percent);
 
