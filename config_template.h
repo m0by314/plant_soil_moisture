@@ -37,4 +37,7 @@ See this link https://www.hackster.io/m0by314/calibrate-soil-moisture-sensor-3c3
 /* Mail Setting */
 #define MAILTO "YOUR_MAIL" /* Replace with your email. */
 
+/* Moisture alert threshold */
+#define THRESHOLD "YOUR_MOISTURE_THRESHOLD" /* Replace with your moisture threshold alert */
+
 #endif 

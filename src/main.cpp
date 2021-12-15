@@ -56,8 +56,8 @@ void setup() {
   
   Serial.printf("Moisture : %i%%\n", soil_moisture_percent);
   
-  // Send mail when the percentage of soil moisture lower a 25%
-  if (soil_moisture_percent <= 25) {
+  // Send mail when the percentage of soil moisture lower than your threshold
+  if (soil_moisture_percent <= int(THRESHOLD)) {
     // Built the mail 
     String mail_object = String(PLANT_NAME) + " must be watered";
     String mail_body = "The " + String(PLANT_NAME) + " must be watered, the percentage of soil moisture is: " + String(soil_moisture_percent) + ".<br>";
