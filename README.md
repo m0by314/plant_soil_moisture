@@ -15,7 +15,7 @@ Tool to plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 
 
 The tool performs a measurement every 6 hours, in order to have the evolution of the soil moisture during the day.  
 
-If the percentage of soil moisture is below 25%, an alert is sent by email using an IFTTT webhook. 
+If the percentage of soil moisture is below than the threshold, an alert is sent by email using an IFTTT webhook. 
   
 The data is stored on an Adafruit IO feed to be visualized in a dashboard. 
 
@@ -111,6 +111,9 @@ See this link https://www.hackster.io/m0by314/calibrate-soil-moisture-sensor-3c3
 
 /* Mail Setting */
 #define MAILTO "YOUR_MAIL" /* Replace with your email. */
+
+/* Moisture alert threshold */
+#define THRESHOLD "YOUR_MOISTURE_THRESHOLD" /* Replace with your moisture threshold alert */
 ```
 
 ## Built with
