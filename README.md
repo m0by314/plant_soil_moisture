@@ -76,13 +76,6 @@ Go to the feeds page to see the key of your feed
 
 * Configure the following variables with your credentials:  
 ```
-/* 
-Moisture Sensor Calibration 
-See this link https://www.hackster.io/m0by314/calibrate-soil-moisture-sensor-3c3a39 for cabribrate moisture sensor 
-*/ 
-#define DRY_VALUE "YOUR DRY VALUE"   /* Replace with the value obtained in dry soil */
-#define WET_VALUE "YOUR WET VALUE"   /* Replace with the value obtained in wet soil */
-
 /* WIFI Setting */
 #define WIFI_SSID "YOUR_WIFI_SSID"     /* Replace with your wifi ssid. */
 #define WIFI_PWD "YOUR_WIFI_PASSWORD"  /* Replace with your wifi password */
