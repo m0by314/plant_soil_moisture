@@ -1,3 +1,0 @@
-[submodule "lib/soil_moisture"]
-	path = lib/soil_moisture
-	url = git@github.com:m0by314/arduino_lib_soil_moisture.git
