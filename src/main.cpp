@@ -3,6 +3,7 @@
 #include <WiFiClientSecure.h>
 
 #include <ifttt.h>
+#include <soil_moisture.h>
 #include "../config.h"
 
 // Prototype
@@ -11,9 +12,6 @@ AdafruitIO_Feed *moisture = io.feed(IO_FEED_NAME); // Set up the feed.
 WiFiClientSecure client;
 IFTTT ifttt_mail(IFTTT_KEY, client);   // Initialize Ifttt object.
 
-// Variables 
-int soil_moisture;
-int soil_moisture_percent;
 
 void setup() {
   Serial.begin(115200);
@@ -50,12 +48,8 @@ void setup() {
   io.run();
 
   // Read Sensor
-  Serial.println("Reading From the Sensor ...");
-  soil_moisture = analogRead(MOISTURE_SENSOR_PIN);
-  soil_moisture_percent = map(soil_moisture, DRY_VALUE, WET_VALUE, MIN, MAX); // calculates the percentage of humidity
-  
-  Serial.printf("Moisture : %i%%\n", soil_moisture_percent);
-  
+  int soil_moisture_percent = get_soil_moisture(MOISTURE_SENSOR_PIN);
+
   // Send mail when the percentage of soil moisture lower than your threshold
   if (soil_moisture_percent <= int(THRESHOLD)) {
     // Built the mail 
