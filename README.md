@@ -4,7 +4,6 @@ Tool to plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 
 ## Summary
  - [How it works](#How-it-works)
  - [Connect the soil moisture sensor](#Connect-the-soil-moisture-sensor)
- - [Calibrate your soil moisture sensor](#Calibrate-your-soil-moisture-sensor)
  - [Create IFTTT webhooks](#Create-IFTTT-webhooks)
  - [Create Adafruit IO dashboard](#Create-Adafruit-IO-Dashboard)
  - [Setup](#Setup)
@@ -25,15 +24,6 @@ Between each measurement, the ESP goes into deep sleep mode.
 
 ![image](static/img/Soil_Moisture_Interfacing_Diagram.png)
 
-## Calibrate your soil moisture sensor 
-
-For more accuracy, the sensor should be calibrated with a sample of the plant's soil. 
-Place a dry soil sample in a cup and use the calibration program available at this link: 
-https://www.hackster.io/m0by314/calibrate-soil-moisture-sensor-3c3a39 
-
-Once the calibration is finished you will receive an email with the threshold for dry soil. 
-
-Water the sample and restart the program to obtain the threshold for wet soil.
 
 ## Create IFTTT webhooks
 
