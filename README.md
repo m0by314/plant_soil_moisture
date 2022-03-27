@@ -1,9 +1,13 @@
 # Plants soil moisture monitoring
 Plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 with soil moisture sensor.
 
+## Cloning
+`git clone --recurse-submodules https://github.com/m0by314/plant_soil_moisture.git`
+
 ## Summary
  - [How it works](#How-it-works)
  - [Connect the soil moisture sensor](#Connect-the-soil-moisture-sensor)
+ - [Calibrate moisture soil sensor](#Calibrate-moisture-soil-sensor)
  - [Create IFTTT webhooks](#Create-IFTTT-webhooks)
  - [Create Adafruit IO dashboard](#Create-Adafruit-IO-Dashboard)
  - [Setup](#Setup)
