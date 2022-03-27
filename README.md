@@ -1,5 +1,5 @@
 # Plants soil moisture monitoring
-Tool to plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 with soil moisture sensor.
+Plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 with soil moisture sensor.
 
 ## Summary
  - [How it works](#How-it-works)
@@ -12,7 +12,7 @@ Tool to plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 
 
 ## How it works
 
-The tool performs a measurement every 6 hours, in order to have the evolution of the soil moisture during the day.  
+The application performs a measurement every 6 hours, in order to have the evolution of the soil moisture during the day.  
 
 If the percentage of soil moisture is below than the threshold, an alert is sent by email using an IFTTT webhook. 
   
@@ -24,6 +24,10 @@ Between each measurement, the ESP goes into deep sleep mode.
 
 ![image](static/img/Soil_Moisture_Interfacing_Diagram.png)
 
+## Calibrate moisture soil sensor
+In order for the sensor to function correctly, it is necessary to carry out a calibration: the value obtained after immersing it in water corresponds to a humidity of 100%, whereas the value obtained in air is that relative to a humidity of 0%. These are indicative values for establishing a scale for evaluating the results.   
+
+To launch the application in calibration mode it is sufficient to change the value of the CALIBRATION constant to true in the config.h file (see [Setup](#Setup) to create config.h file)
 
 ## Create IFTTT webhooks
 
@@ -76,6 +80,11 @@ Go to the feeds page to see the key of your feed
 
 * Configure the following variables with your credentials:  
 ```
+/* Soil sensor */
+#define MOISTURE_SENSOR_PIN 36 
+#define DRY_VALUE "value obtained in air" 
+#define WET_VALUE "value obtained after immersing it in water" 
+
 /* WIFI Setting */
 #define WIFI_SSID "YOUR_WIFI_SSID"     /* Replace with your wifi ssid. */
 #define WIFI_PWD "YOUR_WIFI_PASSWORD"  /* Replace with your wifi password */

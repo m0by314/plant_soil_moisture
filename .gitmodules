@@ -1,0 +1,6 @@
+[submodule "lib/soil_moisture"]
+	path = lib/soil_moisture
+	url = https://github.com/m0by314/arduino_lib_soil_moisture_sensor.git
+[submodule "lib/ifttt"]
+	path = lib/ifttt
+	url = https://github.com/m0by314/arduino_lib_ifttt.git

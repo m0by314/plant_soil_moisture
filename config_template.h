@@ -1,16 +1,20 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-// Sensor pin
-#define MOISTURE_SENSOR_PIN 36 
+#define CALIBRATION false
 
 /* Sleep Time */
 #define HOUR_TO_SLEEP 6ULL                        /* Sleep time between each measurement  */
 #define uS_TO_S_FACTOR 1000000                    /* Conversion factor for micro seconds to seconds */
 #define TIME_TO_SLEEP (HOUR_TO_SLEEP * 60 * 60)  /* Time ESP32 will go to sleep (in seconds) */
 
+/* Soil sensor */
+#define MOISTURE_SENSOR_PIN 36 
+#define DRY_VALUE "value obtained in air" 
+#define WET_VALUE "value obtained after immersing it in water" 
+
 /* WIFI Setting */
-#define WIFI_SSID "YOUR_WIFI_SSID"     /* Replace with your wifi ssid. */
+#define WIFI_SSID "YOUR_WIFI_SSID"     /* Replace with your wifi password */
 #define WIFI_PWD "YOUR_WIFI_PASSWORD"  /* Replace with your wifi password */
 
 /* Plant name */
