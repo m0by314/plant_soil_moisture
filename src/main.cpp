@@ -76,6 +76,5 @@ void setup() {
 void loop() {
   if (CALIBRATION) {
     moisture_sensor.calibrate();
-    delay(500);
   }
 }
