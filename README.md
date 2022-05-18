@@ -1,5 +1,5 @@
-# Plants soil moisture monitoring
-Plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 with soil moisture sensor.
+# Monitor the soil moisture of your plants with Adafruit IO
+Adafruit IO allows to visualize the measurements. An email is sent (using an IFTTT webhook) when watering is required. 
 
 ## Cloning
 `git clone --recurse-submodules https://github.com/m0by314/plant_soil_moisture.git`
@@ -16,22 +16,25 @@ Plants soil moisture monitoring with Adafruit IO dashboard and an ESP32 with soi
 
 ## How it works
 
-The application performs a measurement every 6 hours, in order to have the evolution of the soil moisture during the day.  
+The tool performs a measurement every 6 hours, in order to have the evolution of the soil moisture during the day.  
+The data is stored on an Adafruit IO feed to be visualized in a dashboard.  
 
-If the percentage of soil moisture is below than the threshold, an alert is sent by email using an IFTTT webhook. 
-  
-The data is stored on an Adafruit IO feed to be visualized in a dashboard. 
+If the percentage of soil moisture is below than the threshold, an alert watering for your plant is sent by email using an IFTTT webhook.  
 
 Between each measurement, the ESP goes into deep sleep mode.  
+
+I use the Adafruit IO platform because the free account offers 10 feeds, (which allows to monitor 10 plants), 5 dashboards and the data are stored for 30 days 
 
 ## Connect the soil moisture sensor
 
 ![image](static/img/Soil_Moisture_Interfacing_Diagram.png)
 
 ## Calibrate moisture soil sensor
-In order for the sensor to function correctly, it is necessary to carry out a calibration: the value obtained after immersing it in water corresponds to a humidity of 100%, whereas the value obtained in air is that relative to a humidity of 0%. These are indicative values for establishing a scale for evaluating the results.   
+Before the first use, it is necessary to perform a calibration to ensure that the soil moisture sensor is working properly.
 
-To launch the application in calibration mode it is sufficient to change the value of the CALIBRATION constant to true in the config.h file (see [Setup](#Setup) to create config.h file)
+Leave the sensor in the open air to obtain the DRY_VALUE value (which corresponds to a relative humidity of 0%) then place the sensor in a glass filled with water to obtain the WET_VALUE value (which corresponds to a humidity of 100%). This will provide indicative values for establishing a scale for evaluating the results.
+
+To start the application in calibration mode, simply change the value of the CALIBRATION constant to true in the config.h file (see [Setup](#Setup) to create config.h file)
 
 ## Create IFTTT webhooks
 
