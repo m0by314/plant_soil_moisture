@@ -1,5 +1,4 @@
-# Monitor the soil moisture of your plants with Adafruit IO
-Adafruit IO allows to visualize the measurements. An email is sent (using an IFTTT webhook) when watering is required. 
+# Monitor the soil moisture of your plants with an ESP32
 
 ## Cloning
 `git clone --recurse-submodules https://github.com/m0by314/plant_soil_moisture.git`
@@ -7,7 +6,6 @@ Adafruit IO allows to visualize the measurements. An email is sent (using an IFT
 ## Summary
  - [How it works](#How-it-works)
  - [Connect the soil moisture sensor](#Connect-the-soil-moisture-sensor)
- - [Calibrate moisture soil sensor](#Calibrate-moisture-soil-sensor)
  - [Create IFTTT webhooks](#Create-IFTTT-webhooks)
  - [Create Adafruit IO dashboard](#Create-Adafruit-IO-Dashboard)
  - [Setup](#Setup)
@@ -29,12 +27,6 @@ I use the Adafruit IO platform because the free account offers 10 feeds, (which 
 
 ![image](static/img/Soil_Moisture_Interfacing_Diagram.png)
 
-## Calibrate moisture soil sensor
-Before the first use, it is necessary to perform a calibration to ensure that the soil moisture sensor is working properly.
-
-Leave the sensor in the open air to obtain the DRY_VALUE value (which corresponds to a relative humidity of 0%) then place the sensor in a glass filled with water to obtain the WET_VALUE value (which corresponds to a humidity of 100%). This will provide indicative values for establishing a scale for evaluating the results.
-
-To start the application in calibration mode, simply change the value of the CALIBRATION constant to true in the config.h file (see [Setup](#Setup) to create config.h file)
 
 ## Create IFTTT webhooks
 
@@ -117,5 +109,5 @@ Go to the feeds page to see the key of your feed
 
 ## Built with
 
-* ESP32 NodeMCU Module WLAN WiFi Development Board with CP2102 
-* Moisture sensor YL69 and module HC-38
+* ESP32 DevKitC V4
+* Soil Moisture Sensor Hygrometer Module V1.2 capacitive 
