@@ -1,8 +1,6 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#define CALIBRATION false
-
 /* Sleep Time */
 #define HOUR_TO_SLEEP 6ULL                        /* Sleep time between each measurement  */
 #define uS_TO_S_FACTOR 1000000                    /* Conversion factor for micro seconds to seconds */
