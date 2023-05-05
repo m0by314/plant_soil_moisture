@@ -10,7 +10,7 @@
 // Prototype
 AdafruitIO_WiFi io(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PWD);  // Set up the adafruit WiFi client.
 AdafruitIO_Feed *moisture = io.feed(IO_FEED_NAME); // Set up the feed.
-WiFiClientSecure client;
+WiFiClientSecure client = WiFiClientSecure();
 
 
 IFTTT ifttt_mail(IFTTT_KEY, client);   // Initialize Ifttt object.
