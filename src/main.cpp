@@ -1,20 +1,18 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #include <Arduino.h>
-#include <AdafruitIO_WiFi.h>
-#include <WiFiClientSecure.h>
+#include <WiFi.h>
 
 #include <ifttt.h>
 #include <soil_moisture.h>
+#include <adafruitIO.h>
 #include "../config.h"
 
 
-// Prototype
-AdafruitIO_WiFi io(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PWD);  // Set up the adafruit WiFi client.
-AdafruitIO_Feed *moisture = io.feed(IO_FEED_NAME); // Set up the feed.
-WiFiClientSecure client = WiFiClientSecure();
-
-
-IFTTT ifttt_mail(IFTTT_KEY, client);   // Initialize Ifttt object.
-
+IFTTT ifttt(IFTTT_KEY);   // Initialize Ifttt object.
+AdafruitIO adafruit_feed(IO_KEY, IO_USERNAME); 
 
 void setup() {
   Serial.begin(115200);
@@ -24,31 +22,19 @@ void setup() {
   
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);  // Timer for the wakeup of the ESP
 
-  // connect to io.adafruit.com
-  Serial.print("Connecting to Adafruit IO");
-  io.connect();
-
-  // wait for a connection
-  int timeout = 10;
-  while(io.status() < AIO_CONNECTED && (timeout-- > 0)) {
+  WiFi.mode(WIFI_STA); //Optional
+  WiFi.begin(WIFI_SSID, WIFI_PWD);
+  Serial.println("\nConnecting");
+  int timeout = 0;
+  while(WiFi.status() != WL_CONNECTED && timeout <= 10){
     Serial.print(".");
-    sleep(1);
-  }
-  if (io.status() < AIO_CONNECTED) {
-    Serial.println();
-    Serial.println("ERROR: Adafruit IO fail connection");
-    esp_deep_sleep_start();
+    delay(100);
+    timeout++;
   }
 
-  // we are connected
-  Serial.println();
-  Serial.println(io.statusText());
-  
-  // io.run(); is required for all sketches.
-  // it should always be present at the top of your loop
-  // function. it keeps the client connected to
-  // io.adafruit.com, and processes any incoming data.
-  io.run();
+  Serial.println("\nConnected to the WiFi network");
+  Serial.print("Local ESP32 IP: ");
+  Serial.println(WiFi.localIP());
 
   // Read Sensor
   float soil_moisture_percent = get_soil_moisture_percent(MOISTURE_SENSOR_PIN);
@@ -56,20 +42,38 @@ void setup() {
   // Send mail when the percentage of soil moisture lower than your threshold
   if (soil_moisture_percent <= int(THRESHOLD)) {
     // Built the mail 
-    String mail_object = String(PLANT_NAME) + " must be watered";
-    String mail_body = "The " + String(PLANT_NAME) + " must be watered, the percentage of soil moisture is: " + String(soil_moisture_percent) + ".<br>";
+    int len_object = strlen(PLANT_NAME) + strlen(" must be watered");
+    char mail_object[len_object + 1 ];
+    snprintf(
+      mail_object, 
+      len_object,
+      "%s must be watered", PLANT_NAME
+    );
+
+    int len_body = strlen("The ") + strlen(PLANT_NAME) + strlen(" must be watered, the percentage of soil moisture is: ") + sizeof(soil_moisture_percent) + strlen(".<br>");
+    char mail_body[len_body + 1 ];
+    snprintf(
+      mail_body, 
+      len_body,
+      "The %s must be watered, the percentage of soil moisture is: %f.<br>", PLANT_NAME, soil_moisture_percent
+    );
 
     // Send mail
-    ifttt_mail.triggerEvent(IFTTT_EVENT_NAME, MAILTO, mail_object, mail_body);
+    ifttt.triggerEvent(IFTTT_EVENT_NAME, MAILTO, mail_object, mail_body);
   }
-
-  // Send data to the feed.
-  moisture->save(soil_moisture_percent);
+  
+  // format data as str
+  int len = sizeof(soil_moisture_percent);
+  char buf[len + 1];
+  snprintf(buf, len + 1, "%f", soil_moisture_percent);
+  // update feed
+  adafruit_feed.updateFeed(IO_FEED_NAME, buf);
 
   // Start deep sleep
   Serial.println("Going to sleep ...\n");
   delay(5000);
   esp_deep_sleep_start();
+  
 }
 
 void loop(){
