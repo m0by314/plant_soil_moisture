@@ -4,3 +4,6 @@
 [submodule "lib/ifttt"]
 	path = lib/ifttt
 	url = https://github.com/m0by314/arduino_lib_ifttt.git
+[submodule "lib/adafruitIO"]
+	path = lib/adafruitIO
+	url = https://github.com/m0by314/arduino_adafruit_IO.git
